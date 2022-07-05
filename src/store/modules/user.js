@@ -22,12 +22,13 @@ const mutations = {
 const actions = {
   async login (context, data) {
     const result = await login(data)
-    if (result.data.success) {
-      // 表示登录接口调用成功 也就是意味着你的用户名和密码是正确的
-      // 现在有用户token
-      // actions 修改state 必须通过mutations
-      context.commit('setToken', result)
-    }
+    // console.log(result)
+
+    // 表示登录接口调用成功 也就是意味着你的用户名和密码是正确的
+    // 现在有用户token
+    // actions 修改state 必须通过mutations
+
+    context.commit('setToken', result)
   }
 }
 export default {

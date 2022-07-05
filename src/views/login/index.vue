@@ -19,10 +19,10 @@
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          placeholder="Username"
-          name="username"
+          ref="mobile"
+          v-model="loginForm.mobile"
+          placeholder="Mobile"
+          name="mobile"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -57,7 +57,8 @@
         type="primary"
         style="width: 100%; margin-bottom: 30px"
         @click.native.prevent="handleLogin"
-        >登录</el-button
+      >
+        登录</el-button
       >
 
       <div class="tips">
@@ -80,7 +81,7 @@ export default {
 
     return {
       loginForm: {
-        username: '13800000002',
+        mobile: '13800000002',
         password: '123456'
       },
       loginRules: {

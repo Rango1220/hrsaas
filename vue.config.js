@@ -6,7 +6,7 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'vue Admin Template' // page title
+const name = defaultSettings.title || 'Rango中台管理平台' // page title
 
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
@@ -35,8 +35,17 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    }
+    },
     // before: require('./mock/mock-server.js')
+    // 配置反向代理
+    proxy: {
+      // 当本地请求有/api的时候就会代理请求地址向另一个服务器发送请求
+      '/api': {
+        target: 'http://ihrm-java.itheima.net/',
+        changeOrigin: true // 开启跨域
+      }
+
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

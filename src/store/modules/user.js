@@ -1,5 +1,5 @@
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, getUserInfo } from '@/api/user'
+import { getToken, setToken, removeToken, setTimeStamp } from '@/utils/auth'
+import { login, getUserInfo, getUserDetailById } from '@/api/user'
 // removeToken
 // 状态
 const state = {
@@ -36,11 +36,23 @@ const actions = {
     // actions 修改state 必须通过mutations
 
     context.commit('setToken', result)
+
+    setTimeStamp()// 设置当前的时间戳
   },
   async getUserInfo (context) {
     const result = await getUserInfo()
-    context.commit('setUserInfo', result)
+    // 获取用户的详情信息
+    const baseInfo = await getUserDetailById(result.userId)
+    const baseResult = { ...result, ...baseInfo }
+    context.commit('setUserInfo', baseResult)
     return result
+  },
+  // 登出的action
+  logout (context) {
+    // 删除token
+    context.commit('removeToken') // 不仅仅删除了vuex中的 还删除了缓存中的
+    // 删除用户资料
+    context.commit('removeUserInfo') // 删除用户信息
   }
 }
 export default {
